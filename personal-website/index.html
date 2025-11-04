@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khang Vu (Alex) - Profile</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #0d3d3d;
+            --background-color: #fcfaf5;
+            --text-color: #333333;
+            --light-text-color: #ffffff;
+            --main-font: 'Montserrat', sans-serif;
+        }
+
+
+        body {
+            font-family: var(--main-font);
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-weight:800;
+            color: var(--primary-color);
+        }
+
+        .container {
+            max-width: 1900px;
+            margin: 0 auto;
+            padding: 0 100px;
+        }
+
+        section {
+            padding: 50px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .navbar .logo {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            gap: 30px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: var(--primary-color);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%; 
+        }
+
+        .hero-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 4.5vw, 4.5em);
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            max-width: 600px;
+        }
+
+
+        .hero-photo img {
+            max-width:550px;
+            width: 40vw;
+            height: auto;
+            object-fit: cover;
+            border-radius: 30px;
+            margin-right: -32px;
+
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 87%, transparent 100%);
+        }
+
+        .hero-animation-track {
+            height: 200vh; /* This sets the scroll distance for the animation */
+        }
+
+        #hero {
+            position: sticky;
+            top: 0;
+            height: 100vh; /* Make the section fill the screen */
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            max-width: 150px;
+        }
+
+        #experience {
+            margin-bottom: 60px; /* This adds a 60px gap below the section */
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 20px rgba(0,0,0,0.1);
+        }
+
+        #about, #academics-skills {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+        }
+
+        #about h2, #academics-skills h2 {
+            color: var(--light-text-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: box-shadow 0.4s;
+            cursor: pointer;
+        }
+        
+        .card:hover {
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transform: translateY(-3px);
+        }
+
+        #academics-skills .card {
+            color: var(--text-color);
+        }
+
+        .clickable-video {
+            cursor: pointer;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card h3::after {
+            content: '▼';
+            font-size: 0.8em;
+            transition: transform 0.4s;
+        }
+
+        .card.active h3::after {
+            transform: rotate(180deg);
+        }
+
+        .card-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+        }
+
+        .card.active .card-details {
+            max-height: 1500px;
+            margin-top: 15px;
+        }
+
+        #modal-body .video-container {
+            width: 90%;
+            max-width: 960px; /* Control the max size */
+            height: auto;
+            aspect-ratio: 16 / 9; /* Maintain widescreen ratio */
+            margin: auto;
+        }
+
+        .card-details img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skills-list li {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--light-text-color);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        #contact {
+            text-align: center;
+        }
+
+        /* Add extra space above these specific sections */
+        #projects, #experience, #contact {
+            margin-top: 50px;
+        }
+
+        /* === NEW: Horizontal Image Scroller Styling === */
+        .image-scroller {
+            display: flex;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 10px;
+            scroll-snap-type: x mandatory;
+            align-items: center; /* This vertically aligns the video and images */
+        }
+
+        /* === FINAL FIX FOR IMAGE SCROLLER === */
+        .card-details .image-scroller img {
+            max-height: 450px;  /* Or your desired height */
+            width: auto;
+            max-width: none;      /* This is the crucial override */
+            flex-shrink: 0;     /* This prevents flexbox from shrinking it */
+            border-radius: 5px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        /* Optional: Style the scrollbar to be more subtle */
+        .image-scroller::-webkit-scrollbar {
+            height: 8px;
+        }
+        .image-scroller::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        .image-scroller::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+        .image-scroller::-webkit-scrollbar-thumb:hover {
+            background: #aaa;
+        }
+
+        .card-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: left;
+            border-radius: 5px;
+        }
+
+        .unmute-button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--main-font);
+        }
+
+        .fade-in-section {
+            opacity: 0; /* Start invisible */
+            transform: translateY(20px); /* Start slightly lower */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in-section.visible {
+            opacity: 1; /* Fade to fully visible */
+            transform: translateY(0); /* Move back to original position */
+        }
+
+        #about p {
+            text-align: justify;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Adds space between the buttons */
+            margin-top: 13px;
+        }
+
+        #modal-body .image-scroller img {
+            border: 1px solid #ddd;
+            flex-shrink: 0;
+            scroll-snap-align: center;
+        }
+
+        @media (max-width: 768px) {
+
+            /* 1. Stack the Hero Section Content */
+            .hero-content {
+                flex-direction: column; /* Stack text on top of photo */
+                text-align: center;     /* Center the title and paragraph */
+                justify-content: center;/* Vertically center everything in the hero */
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-top: 30px;
+            }
+
+
+            .hero-text {
+                margin-bottom: 0px; /* Add space between the text and photo */
+                text-align: center;
+            }
+
+            .hero-photo img {
+                width: 140%; /* Make the photo a bit smaller on mobile */
+                max-width: 400px; /* But not too big */
+                margin: 0 auto; /* Ensure it's centered */
+            }
+
+            
+
+            .navbar .logo {
+                font-size: 0.8em;
+                font-weight: 700;
+                color: var(--primary-color);
+                text-decoration: none;
+            }
+
+            .container {
+                padding: 0 25px;
+            }
+
+            /* 3. Make titles a bit smaller */
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            /* 4. Stack the Contact Buttons */
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+
+            .navbar a {
+                font-size: 9px; /* Adjust this value as needed */
+            }
+
+            .navbar ul {
+                list-style: none;
+                display: flex;
+                margin: 0;
+                padding: 0;
+                gap: 4px;
+            }
+
+            /* Make base text slightly smaller on mobile */
+            body {
+                font-size: 14px;
+            }
+        }
+
+        /* === NEW: Notebook Section Styling === */
+        #notebook {
+            text-align: center; /* Center the heading and paragraph */
+            border-top: 1px solid #eee; /* This adds the line */
+            padding-top: 20px; /* This adds space above the title */
+            margin-top: 40px;  /* This adds space above the line */
+        }
+
+        #note-input {
+            width: 100%;
+            max-width: 600px;
+            height: 100px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: var(--main-font);
+            font-size: 1rem;
+            box-sizing: border-box; 
+            transition: border-color 0.3s;
+        }
+
+        #note-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        #notes-container {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center the notes horizontally */
+            gap: 15px;
+        }
+
+        .note {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 600px;
+            text-align: left; /* Keep the text inside the note left-aligned */
+            white-space: pre-wrap; /* Preserves line breaks and spacing */
+        }
+
+        /* === NEW: Experience Section & Modal Styling === */
+
+        /* The new container for the full-width experience rows */
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 40px; /* Space between each experience row */
+            margin-top: 40px;
+        }
+
+        .experience-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .experience-preview {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .experience-text h3 {
+            margin-top: 0;
+        }
+        
+
+        #modal-body .experience-details h3 {
+            margin-bottom: 10px; 
+        }
+
+        /* Make the image scroller go edge-to-edge inside the card */
+        .experience-card .image-scroller {
+            margin: -30px -30px 20px -30px;
+            border-top-left-radius: 12px;  /* Add this */
+            border-top-right-radius: 12px; /* Add this */
+        }
+
+        /* Round the top corners of the first image to match the card */
+        .experience-card .image-scroller img:first-child {
+            border-top-left-radius: 12px;
+        }
+
+        /* Round the top corners of the last image (for single-image rows) */
+        .experience-card .image-scroller img:last-child {
+            border-top-right-radius: 12px;
+        }
+
+        .indented-block {
+            margin-left: 40px;
+        }
+
+        /* Modal Overlay: The blurred background */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        #modal-body .image-scroller img {
+            max-height: 600px; 
+            margin-top: 20px;    /* Add this line */
+            margin-bottom: 20px; /* Add this line */
+        }
+
+        #modal-body .image-scroller {
+            padding-bottom: 0;
+            margin-bottom: 25px; /* Re-add space using margin so it's outside the scroll area */
+        }
+
+        /* ADJUSTMENT 3: Reduce the big gap between the title and the "A Deeper Dive" text */
+        #modal-body .experience-details h3 {
+            margin-top: 10px; /* Reduces space above "A Deeper Dive" */
+            margin-bottom: 5px; /* Tightens space between it and the paragraph below */
+        }
+
+        .modal-content {
+            background-color: var(--background-color);
+            border-radius: 12px;
+            width: 85vw;
+            max-width: 1400px;
+            position: relative;
+            display: block;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            overflow: hidden; /* This is the key change to enforce rounded corners */
+        }
+
+        #modal-body {
+            padding: 25px 35px 25px 25px;
+            max-height: 80vh; /* This must match the original max-height */
+            overflow-y: auto;
+            scrollbar-gutter: stable;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        #modal-body h3 {
+            margin-top: 0;
+            font-size: 1.8em;
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+            color: #888;
+        }
+
+        /* === START: UNIFIED MODAL SPACING (Replaces all previous attempts) === */
+
+        /* Step 1: Set a consistent baseline for ALL paragraphs inside the modal.
+        This removes the browser's default top margin, which is the root cause of the issue. */
+        #modal-body p {
+            margin-top: 0;
+            margin-bottom: 16px; /* Standard space below paragraphs */
+        }
+
+        /* Step 2: Set a consistent baseline for ALL h3 titles inside the modal. */
+        #modal-body h3 {
+            margin-top: 25px;    /* Adds space ABOVE titles to separate sections */
+            margin-bottom: 8px;  /* Adds a TIGHT space BELOW titles */
+        }
+
+        /* Step 3 (Override): Remove the top margin from the very FIRST title
+        so it sits nicely under the image gallery. */
+        #modal-body .experience-text h3 {
+            margin-top: 0;
+        }
+
+        /* === END: UNIFIED MODAL SPACING === */
+
+        /* Class to prevent background scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        footer {
+            padding: 1px 0;
+            text-align: center;
+            color: #777;
+            border-top: 1px solid #eee;
+            margin-top: 60px;
+        }
+
+        /* === START: FINAL, WORKING MEDIA SIZING === */
+
+        /* Rule 1: Keep the "What I Owe" video untouched and perfect. */
+        #projects .video-container {
+            position: relative;
+            flex-shrink: 0;
+            width: 800px; 
+            margin-top: 10px;
+            height: 450px;
+        }
+
+        /* Rule 2 (THE FIX): Set an explicit height for BOTH the new video and images in the small card preview. */
+        #experience .experience-preview .image-scroller img,
+        #experience .experience-preview .image-scroller .video-container {
+            height: 400px; /* This is the key change from max-height */
+            width: auto;
+            border-radius: 5px;
+        }
+
+        /* Rule 3 (Helper): Give the video container its shape so it doesn't collapse. */
+        #experience .experience-preview .image-scroller .video-container {
+            aspect-ratio: 16 / 9;
+        }
+
+        /* Rule 4: Set an explicit height for ALL media in the enlarged modal for consistency. */
+        #modal-body .image-scroller img,
+        #modal-body .image-scroller .video-container {
+            height: 600px; /* Using height here too for reliability */
+            width: auto;
+            border-radius: 5px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        /* Rule 5 (Helper): Give the video container its shape in the modal as well. */
+        #modal-body .image-scroller .video-container {
+            aspect-ratio: 16 / 9;
+        }
+
+        /* Rule 6: Ensures the actual <video> tag fills its container. */
+        .video-container .card-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .academic-summary {
+            text-align: left;
+            margin: 0 0 40px 0; /* Aligns block to the left and removes max-width */
+        }
+
+        .academic-summary ul,
+        .academic-summary p,
+        .academic-summary h4 {
+            max-width: 900px;
+        }
+
+        .academic-summary h3, #academics-skills > .container > h3 {
+            font-size: 1.6em;
+            color: var(--light-text-color); /* Ensures headings are white */
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 8px;
+            margin-top: 40px; /* Adds space between sections */
+        }
+
+        .academic-summary h4 {
+            font-size: 1.1em;
+            color: var(--light-text-color);
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+
+        #academics-skills > .container > h3 {
+            margin-bottom: 30px; 
+        }
+
+        /* This is the key part: styles all the new lists */
+        .academic-summary ul {
+            list-style: none; /* Removes the default bullets */
+            padding-left: 0; /* Removes the default indentation */
+        }
+
+        .academic-summary li {
+            position: relative;
+            padding-left: 25px; /* Adds space for our custom bullet */
+            margin-bottom: 10px; /* Spaces out the list items */
+            font-size: 1rem;
+        }
+
+        /* This creates the new, custom dash-style bullet */
+        .academic-summary li::before {
+            content: '–'; /* This is a long dash */
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: rgba(255, 255, 255, 0.8); /* Makes the bullet slightly transparent */
+            font-weight: 700;
+        }
+
+         /* === START: SIZING FOR ACADEMIC PROJECTS GRID (FINAL FIX) === */
+
+            /* This rule targets ONLY the images in this one section */
+            #academics-skills .card-details .image-scroller img {
+                height: 300px;  /* <-- This is the fix (was max-height) */
+                width: auto;
+                max-width: none;
+                flex-shrink: 0;
+                border-radius: 5px;
+                margin-top: 10px;
+                border: 1px solid #ddd;
+                cursor: pointer;
+            }
+
+            /* This rule targets ONLY the videos in this one section */
+            #academics-skills .card-details .image-scroller .video-container {
+                height: 300px;  /* <-- This is the fix (was max-height) */
+                aspect-ratio: 16 / 9;
+                width: auto;
+                flex-shrink: 0;
+                margin-top: 10px;
+                border-radius: 5px;
+            }
+
+            /* === END: SIZING FOR ACADEMIC PROJECTS GRID (FINAL FIX) === */
+
+
+    </style>
+</head>
+<body>
+
+    <header class="container">
+        <nav class="navbar">
+            <a href="#" class="logo">Oh look, it's Alex!</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#academics-skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero-animation-track">
+            <section id="hero" class="hero container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Hi, I'm Alex!</h1>
+                        <p>Audio nerd & aspiring engineer in acoustics, music, and audio quality | 
+                            constant learner & dedicated collaborator</p>
+                        <a href="#about" class="cta-button">Let's go!</a>
+                    </div>
+                    <div class="hero-photo">
+                        <img src="images/portrait-shadow.png" alt="A photo of Khang Vu">
+                    </div>
+                </div>
+            </section>
+        </div>    
+
+        <section id="about">
+            <div class="container fade-in-section">
+                <h2>About Me</h2>
+                <p>
+                Having started as a musician passionate about music and sound, I plan to become an audio engineering, working on audio devices like headphones/speakers or technologies like acoustics/Active Noise Cancellation to create a better listen in consumer audio. 
+                Up to now, I've found the consumer audio industry to be dominantly led by brand marketing and image rather than genuine quality, so
+                I hope to widely reinstate the standards of listening and deliver the true emotions & experience that music carries! 
+
+                <br><br>
+
+                Beyond audio, I'm also deeply interested in understanding and utilizing Artifial Intelligence (like the one writing this passage right now, I'm just kidding), and I'm trying to get good at robotics, 3D design, video editing, computer science, and maybe a little business as well. 
+
+                <br><br>
+
+                On a personal side, I try to maintain a mindset of personal development, constant learning, and hence, I love to work in a collaborative way that inspires, and coordinate/connect everyone around me in the process!
+
+                </p>
+            </div>
+        </section>
+
+        <section id="projects" class="container fade-in-section">
+            <h2>Featured Projects</h2>
+            <div class="grid">
+                 <div class="card">
+                    <div>
+                        <h3>Published Research on Active Noise Cancellation</h3>
+                        <p>
+                            Authored a physics research paper investigating and modeling Active Noise Cancellation (ANC) technology.
+                        </p>
+                    </div>
+                    <div class="card-details">
+                        <p>
+                        The paper titled, <strong>"Exploring the Effects of Frequency Composition and Timbre of Noise on Active Noise Cancellation in Over-Ear Headphones,"</strong>
+                        investigated how the pitch and texture of noise affect ANC performance, tying to the technology's current real-world limitations.
+
+                        <br><br>
+                        It combined theoretical analysis with 72 empirical measurements to develop an <strong>adaptive Fourier Series</strong>
+                        that <strong>predicts</strong> ANC performance/characteristics based on an audio system's specific time delay; hence, depening udnerstanding and 
+                        establishing a framework for future developments. 
+
+                        <br><br>
+                        Currently, the paper is published by the <strong>Curieux Academic Journal</strong> and under revision by the <strong>Young Scientist Journal</strong>.
+
+
+                        <br><br>
+                        Check out the excerpts below or here! <a href="https://www.curieuxacademicjournal.com/fall-winter2024">Issue 42 - Part 1 (Page 627)</a> </p>
+
+                        </p>
+                        <div class="image-scroller">
+                            <img src="images/research/research-sample 3.png" alt="Research paper excerpt">
+                            <img src="images/research/research-sample5.png" alt="Research paper excerpt">
+                            <img src="images/research/reserach-sample4.png" alt="Research paper excerpt">
+                            <img src="images/research/research-sample1.png" alt="Research paper excerpt">
+                            <img src="images/research/research-sample2.png" alt="Research paper excerpt">
+                            <img src="images/research/experiment1.JPG" alt="Experiment">
+                            <img src="images/research/experiment2.JPG" alt="Experiment">
+                            <img src="images/research/experiment3.JPG" alt="Experiment">
+                            <img src="images/research/experiment4.JPG" alt="Experiment">
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>Project Audio Justice Initiative (AJI)</h3>
+                        <p>An award winning creativity and service project intended to bring more great audio quality to consumer audio.</p>
+                    </div>
+                    <div class="card-details">
+                        <p>
+                            Stemming from UNSDG 9 and the mass misrepresentation in consumer audio, I started the AJI to provide genuinly good audio <srtrong>as accessibly as possible</srtrong>.
+
+                            <br></br>
+
+                            Specifically, the AJI work to improve the <strong>tuning</strong> of popular headphones/speakers by developing <strong>specific equalizer settings</strong>,
+                             a tool to adjust the relative loudness of different frequencies. These settings are then shared online through platforms of large impacts such as Reddit and other other forums.
+
+                            <br></br>
+
+                            So far, the AJI has worked on <strong>5 bluetooth speakers, 4 pairs of headphones</strong>, has been acknowledged by Anker and Rtings.com, won <srtong>1st place</srtong> the Renaissance 2024 CAS Project Fair, and is still on-going!
+
+
+
+                        </p>
+                            <div class="image-scroller">
+                                <img src="images/aji/casfair1.jpg" alt="Project Audio Justice Initiative">
+                                <img src="images/aji/casfair2.jpg" alt="Project Audio Justice Initiative">
+                                <img src="images/aji/casfair3.png" alt="Project Audio Justice Initiative">
+                                <img src="images/aji/sample.jpg" alt="Project Audio Justice Initiative">
+                                <img src="images/aji/sample1.jpg" alt="Project Audio Justice Initiative">
+                                <img src="images/aji/sample2.jpg" alt="Project Audio Justice Initiative">
+                                <img src="images/aji/sample3.jpg" alt="Project Audio Justice Initiative">
+                                <img src="images/aji/earfunairpro4.jpg" alt="Project Audio Justice Initiative">
+                                <img src="images/aji/ankerq30.jpg" alt="Project Audio Justice Initiative">
+                            </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>"What I Owe" Film Scoring Project</h3>
+                        <p>Composed, orchestrated, and digitally produced a 6-minutes theme song on Logic Pro.</p>
+                    </div>
+                    <div class="card-details">
+                        <p>
+                            Part of a film scoring prject, a friend and I created <strong>"What I Owe"</strong>, an orchestral theme song from the ground up, simulating professional work. 
+                            We co-composed, worked on the studio recording, my partner wrote the lyrics, and I handled the full instrument arrangements and digital production on the industry standard software, <strong>Logic Pro.</strong>
+
+                            <br></br>
+
+                            Since then, our piece has debuted on <strong>Apple Music, Spotify, and 150 other online stores</strong> world wide — inspiring my high school, Renaissance International School Saigon, to host their own Spotify account to publish students works!
+
+                            <br></br>
+
+                            Check out the song <a href="https://artists.landr.com/055855768292">here</a> or in the gallery below!  </p>
+
+
+                        </p>
+                        <div class="image-scroller">
+                            <div class="video-container">
+                                <video autoplay muted loop playsinline src="images/what-owe/what-i-owe-demo2.mp4" class="card-video clickable-video"></video>
+                                <button class="unmute-button">Unmute</button>
+                            </div>
+                            <img src="images/what-owe/release-cover.jpg" alt="Composition cover">
+                            <img src="images/what-owe/mv-filming1.jpeg" alt="What I Owe music video filming">
+                            <img src="images/what-owe/mv-filming2.jpeg" alt="What I Owe music video filming">
+                            <img src="images/what-owe/mv-filming3.png" alt="What I Owe music video filming">
+                            <img src="images/what-owe/mv-filming4.jpeg" alt="What I Owe music video filming">
+                            <img src="images/what-owe/mv-filming5.jpeg" alt="What I Owe music video filming">
+                            <img src="images/what-owe/mv-filming6.png" alt="What I Owe music video filming">
+                            <img src="images/what-owe/score1.jpg" alt="What I Owe music video filming">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="container fade-in-section">
+            <h2>Professional Experience</h2>
+            <div class="experience-list">
+                
+                <div class="experience-card" role="button">
+                    <div class="experience-preview">
+                        <div class="image-scroller"> 
+
+                            <div class="video-container">
+                                <video autoplay muted loop playsinline src="images/delhom/timelapse-edited.mov" class="card-video clickable-video"></video>
+                            </div>
+
+                            <img src="images/delhom/1.JPG" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/4.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/6.jpeg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/7.jpg" alt="Delhom Acoustics Gallery"> alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/9.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/10.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/11.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/12.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/13.jpeg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/14.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/15.gif" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/16.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/17.gif" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/18.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/19.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/20.jpg" alt="Delhom Acoustics Gallery">
+                            <img src="images/delhom/21.jpg" alt="Delhom Acoustics Gallery">
+                        </div>
+                        <div class="experience-text"> <h3>Acoustics Engineer Intern | Delhom Acoustics</h3>
+                            <p>‣ One-on-one training in all acousstics concept: airbone sound insulation, reverberation, environmental, impact, and background noise <br>
+                                ‣ 3D simulations, and hands on experience in various and company projects & reports.</p>
+                        </div>
+                    </div>
+                    <div class="experience-details" style="display: none;">
+                        <h3>A Deeper Dive:</h3>
+                        <p>
+                            As I completed the IBDP focused on audio technology, I was eager to explore the real-life industry and its working environment. 
+                        </p>
+                        <p>
+                            In my gap year from October 2024, I had a <strong>paid internship with Delhom Acoustics</strong>, a multinational consultancy from France, 
+                            where I received one-on-one training in all acoustics concepts: <i>airborne insulation, 
+                            reverberation with ODEON simulation software, background, environmental, and impact noise. </i>
+                        </p>
+                        <p>
+                            I carried out a <strong>company statistic analysis</strong> on airborne sound insulation of hotel partitions 
+                            like corridors and adjoining walls, and also worked with business development to <strong>localize a 
+                            170-page company profile</strong> for the Vietnam office. Bringing back these insights, I conducted an
+                            <strong>acoustic research at Renaissance</strong>, analyzing reverberation and background noise in over 8 music and library spaces and creating industry-standard analysis report to be implemented. 
+                        </p>
+                        <p>
+                            Latest, as I was getting good at 3D Modeling, I carried out an <strong>acoustic simulation project</strong>.
+                            Working in-depth with industry-standard <strong>room acoustics software ODEON, I set up 3D models, ran auralization (audio simulation of how the space sound) and calculated acoustics
+                             parameters</strong> to determine optimal loudspeaker setup (comparing a 1 to 8 speakers system) for a joint cafe & pilates studio.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="experience-card" role="button">
+                    <div class="experience-preview">
+                        <div class="image-scroller">
+                            <img src="images/renaissance/1.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/2.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/3.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/4.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/5.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/6.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/7.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/8.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/9.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/10.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/11.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/12.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/13.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/14.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/15.jpg" alt="Renaissance Theater">
+                            <img src="images/renaissance/16.jpg" alt="Renaissance Theater">
+                        </div>
+                        <div class="experience-text">
+                            <h3>Audio, Lighting & Media Engineer | Renaissance International School Saigon</h3>
+                            <p>‣ Former paid intern and current official part-time employee <br>
+                                 ‣ Operates a 320 seats theater working with GrandMA2 lighting, production media design, and audio systems</p>
+                        </div>
+                    </div>
+                    <div class="experience-details" style="display: none;">
+                        <h3>A Deeper Dive...</h3>
+                        <p>Having demonstrated my love for music and audio technology during my studies at Renaissance, 
+                            I was offered a <strong>paid internship</strong> during my gap year and eventual <stron>part-time position.</strong> 
+                            As an audio engineer, I learned to operate live audio and lighting in a 320-seat theater. 
+                            We worked with the <strong>GrandMA2 stage lighting system</strong> controlling 20 beams and 16 parleds. 
+                            We also managed audio for various full-scale events, including both in school events like 
+                            the Talent Show, Graduation, and Musical Productions and also <strong>full-scale externally rented concerts</strong> hosted at the theater.</p>
+
+                        <p>Beyond this, I also managed various recording/mixing projects for other school departments. 
+                            This includes photography, facilitating events and various video effects & editing work with <strong>DaVinci Resolve. </strong>
+                            Aside from that, I'm also learning 3D modeling with Blender (I made an accurate model of the K329 Belgorod nuclear submarine) 
+                            and 3D printing to help in Renaissance's Makerspace department in the future!</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="academics-skills">
+            <div class="container fade-in-section">
+                
+                <div class="academic-summary">
+
+                    <!-- Section 1: Educational History -->
+                    <h3>Education History</h3>
+                    <p class="indented-block">
+                        <h4>International Baccalaureate Diploma Program (IBDP)</h4>
+                    Final IBDP Results: <u>42 points</u> (6 subjects maximum 7 points each & up to 3 additional points)
+                    </p>
+                    <ul class = "indented-block">
+                        <li><strong>HL:</strong> Music (7), Mathematics Analysis and Approaches (7), Physics (6)</li>
+                        <li><strong>SL:</strong> English Lang & Lit (6), French Ab (7), Business Management (7)</li>
+                        <li>Extended Essay in Physics</li>
+                    </ul>
+
+                    <h4>Standardized Tests</h4>
+                    <ul class = "indented-block">
+                        <li><strong>SAT Total:</strong> <u>1550</u> (790 Math & 760 R&W)</li>
+                        <li>One attempt, self-prepared with Khan Academy</li>
+                    </ul>
+
+                    <!-- Section 2: Additional Extracurricular -->
+                    <h3>Additional Extracurricular</h3>
+                    <ul class = "indented-block">
+                        <li>VICS Student Council Vice President & Class Representative</li>
+                        <li>Renaissance House Captain: organization & planning of school-wide sporting events</li>
+                        <li>Main Libero at Renaissance Volleyball Team</li>
+                        <li>2 times Table Tennis Champion at VICS Sport Fest</li>
+                    </ul>
+
+                    <!-- Section 3: Achievements -->
+                    <h3>Achievements</h3>
+                    
+                    <h4>Academic</h4>
+                    <ul class = "indented-block">
+                        <li>Renaissance <strong>IBDP Scholarship (at the highest level: 90%)</strong></li>
+                        <li>Renaissance <strong>1st Head of School Award 2024</strong></li>
+                    </ul>
+
+                    <h4>Music</h4>
+                    <ul class = "indented-block">
+                        <li><strong>London College of Music Examinations (LCME) </strong> - Music Theory Grade 5 | <u>Distinction</u></li>
+                        <li><strong>London College of Music Examinations </strong> - Piano Recital Grades: 5, 6, 7, 8 | <u>Distinction</u></li>
+                        <li>Top 10 - Asia FOBISIA Battle of the Bands (2024)</li>
+                        <li>Pianist and coordinator in various in-school & inter-school bands</li>
+                        <li>Finalist at 4th Singapore International Piano Competition & Steinway International Youth Piano Competition</li>
+                    </ul>
+
+                </div> 
+
+                <h3>Upcoming Projects</h3>
+
+                <div class="grid">
+                    <div class="card">
+                        <div>
+                            <h3>Self-Balancing Robot</h3>
+                            <p>
+                                Building and training <strong><span style="color:#79a170;"> "Matcha 🌱"</span></strong> a two-wheeled auto-balancing robot using Reinforcement Learning with PyBullet.
+                            </p>
+                        </div>
+                        <div class="card-details">
+                            <p><strong><span style="color:#79a170;"> "Matcha 🌱"</span></strong>  will balance, drive around, <strong>jump</strong> (and hopefully not tumble) to traverse obstacles, and self-navigate with an on-board camera system. </p>
+                            <div class="image-scroller">
+                                
+                                <!-- Video 1 -->
+                                <div class="video-container">
+                                    <video autoplay muted loop playsinline src="images/robot/1.mov" class="card-video clickable-video"></video>
+                                </div>
+                                <!-- Video 3 -->
+                                <div class="video-container">
+                                    <video autoplay muted loop playsinline src="images/robot/3.mov" class="card-video clickable-video"></video>
+                                </div>
+
+                                <!-- Image 4 -->
+                                <img src="images/robot/4.png" alt="Robot simulation">
+
+                                <!-- Image 5 -->
+                                <img src="images/robot/5.jpeg" alt="Robot hardware">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <h3>ESP32 "Autopilot" Boat</h3>
+                            <p>Building a remote controlled boat with the ESP32 and the BNO055IMU, drivable with Wifi through a specifically-designed web control interface hosted directly on the ESP32</p>
+                        </div>
+                        <div class="card-details">
+                            <p>The boat supports a <strong>PID control system</strong>, allowing for <strong>automatic heading lock</strong>, degree-accurate rotation, autopilot-assited manual controls: heading correction for all forward & turning movements</p>
+                            
+                            <div class="image-scroller">
+                                
+                                <div class="video-container">
+                                    <video autoplay muted loop playsinline src="images/boat/2.mp4" class="card-video clickable-video"></video>
+                                </div>
+
+                                <img src="images/boat/1.jpg" alt="ESP32 boat web interface">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <h3>Renaissance Arts, Music, and Theater Exhibition Site</h3>
+                            <p>Designing the <strong>official</strong> publishable website with HTML, CSS, JavaScript to exhibit image and video records of student's music, arts, and theater work</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <h3>Smart Temperature, Humidity, and Gas Sensing System</h3>
+                            <p>A Wifi enabled system to monitor science chemical storage shelves at Renaissance International School Saigon.</p>
+                        </div>
+                        <div class="card-details">
+                            The system should support <strong>threshold notifications</strong>, monitoring 2 shelves of 4 compartments each. <strong>Temperature</strong> measurements should be accurate to ±1 and <strong>humidity</strong> accurate to ±3%. Furthermore, explosive gas monitoring is also under consideration. 
+                            
+                            <div class="image-scroller">
+                                
+                                <img src="images/thermometersystem/1.jpg" alt="Chemical storage sensing system diagram">
+                                <img src="images/thermometersystem/2.jpg" alt="Chemical storage sensing system diagram">
+                                <img src="images/thermometersystem/3.jpg" alt="Chemical storage sensing system diagram">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <h3>Digital Thermometer</h3>
+                            <p>Designing an Wifi & blluetooth enabled thermometer and hygrometer using an ESP32, DHT11 sensor, and LCD screen, capable of web measurement logging</p>
+                        </div>
+                        <div class="card-details">
+                            <p>
+                                The thermometer's case is designed from scratch with Blender and <strong>3D printed</strong>, featuring a sliding back cover, sensor, display, and button cutouts, and individual component mounting pillars & supports <br><br>
+                                Buttons are supported through <strong>button-specific mounts</strong>, allowing one case design compatitble with multiple button constructions.
+                            </p>
+                            
+                            <div class="image-scroller">
+                                
+                                <div class="video-container">
+                                    <video autoplay muted loop playsinline src="images/thermometer/1.mov" class="card-video clickable-video"></video>
+                                </div>
+
+                                <img src="images/thermometer/2.jpg" alt="3D printed thermometer case">
+                                <img src="images/thermometer/3.jpg" alt="3D printed thermometer case interior">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <h3>Acoustics Research into the Occlusion Effect</h3>
+                            <p>Acoustics reserach on how to minimize the occlusion effect (the effect where a headphones/earphones user's internal sound is amplified by the device) through enclosure design</p>
+                        </div>
+                        <div class="card-details">
+                            <p>This research will likely involve <strong>3D modeling</strong> environments in Blender and running <strong>acoustics simulations in ODEON</strong> for theoretical analysis before experiments with real-life prototypes are carried out with the <strong>MiniDSP EARs</strong></p>
+                            <img src="images/what-owe/mv-filming.jpg" alt="What I Owe music video filming">
+                        </div>
+                    </div>
+                </div></div>
+        </section>
+    
+        <section id="contact" class="container fade-in-section">
+            <h2>Get In Touch</h2>
+            <p>I'm always open to talking about someting fun, new projects, and opportunities!</p>
+            <div class="contact-buttons">
+                <a href="mailto:alexvu573@gmail.com" class="cta-button">Email Me</a>
+                <a href="www.linkedin.com/in/khang-vu-35072b330" target="_blank" class="cta-button">LinkedIn</a>
+                <a href="https://www.youtube.com/@MrAlex-lk8zn" target="_blank" class="cta-button">YouTube</a>
+            </div>       
+         </section>
+
+
+         <section id="notebook" class="container">
+            <h2>Comments Section</h2>
+            <p>Leave your comments below and press Enter to add it. I think it should work :)</p>
+
+            <textarea id="note-input" placeholder="Write something..."></textarea>
+
+            <div id="notes-container">
+                </div>
+        </section>
+    </main>
+
+    <div id="experience-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button">&times;</button>
+            <div id="modal-body">
+                </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Khang Vu. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // === SCRIPT 1: SMOOTH SCROLLING FOR NAV LINKS ===
+        document.querySelectorAll('nav a[href^="#"], a.cta-button[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const offsetPosition = targetElement.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // === SCRIPT 2: EXPANDABLE CARDS ===
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('active');
+            });
+        });
+
+        // === SCRIPT 3 (UPGRADED): PINNED SCROLL PHOTO FADE ===
+        const track = document.querySelector('.hero-animation-track');
+        const heroPhoto = document.querySelector('.hero-photo');
+
+        window.addEventListener('scroll', () => {
+            if (!track || !heroPhoto) return; // Safety check
+
+            // Calculate the total distance for the animation
+            const totalAnimationDistance = track.offsetHeight - window.innerHeight;
+
+            // Calculate our progress through the animation (from 0.0 to 1.0)
+            let progress = window.scrollY / totalAnimationDistance;
+            progress = Math.max(0, Math.min(1, progress)); // Keep it between 0 and 1
+
+            // Link the photo's opacity directly to the scroll progress
+            // As you scroll down (progress -> 1), opacity goes down (-> 0)
+            heroPhoto.style.opacity = 1 - progress;
+
+            // Add a subtle shrink effect for extra polish
+            heroPhoto.style.transform = `scale(${1 - progress * 0.1})`;
+        });
+
+        // === SCRIPT 4: UNMUTE VIDEO BUTTONS ===
+        document.querySelectorAll('.unmute-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+
+                const video = button.previousElementSibling; // Finds the video right before the button
+                if (video && video.tagName === 'VIDEO') {
+                    video.muted = !video.muted; // Toggles the muted state
+                    button.textContent = video.muted ? 'Unmute' : 'Mute';
+                }
+            });
+        });
+
+        // === SCRIPT 5 (UPGRADED): FADE-IN & AUTOPLAY VIDEO ON SCROLL ===
+        const sectionsToAnimate = document.querySelectorAll('.fade-in-section, .card-video');
+
+        const observerOptions = {
+            root: null, 
+            threshold: 0.2 
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // If it's a section, add the 'visible' class to fade it in
+                    if (entry.target.classList.contains('fade-in-section')) {
+                        entry.target.classList.add('visible');
+                    }
+                    // If it's a video, try to play it
+                    if (entry.target.tagName === 'VIDEO') {
+                        entry.target.play().catch(error => {
+                            // This catch block prevents console errors on browsers that still block autoplay
+                            console.log("Autoplay was prevented for a video.");
+                        });
+                    }
+                    // Stop observing the element once it's handled
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        sectionsToAnimate.forEach(element => {
+            observer.observe(element);
+        });
+
+        // === SCRIPT 6: SIMPLE NOTEBOOK FUNCTIONALITY ===
+        const noteInput = document.getElementById('note-input');
+        const notesContainer = document.getElementById('notes-container');
+
+        noteInput.addEventListener('keydown', (e) => {
+            // 1. Check if the pressed key is 'Enter'
+            if (e.key === 'Enter') {
+                // 2. Prevent the default action (which is adding a new line)
+                e.preventDefault();
+
+                // 3. Get the text from the input, trimming whitespace
+                const noteText = noteInput.value.trim();
+
+                // 4. If there is text, create and add the new note
+                if (noteText) {
+                    // Create a new div element for the note
+                    const newNote = document.createElement('div');
+                    newNote.classList.add('note'); // Add our '.note' style
+                    newNote.textContent = noteText; // Set its text
+
+                    // Add the new note to the top of the container
+                    notesContainer.prepend(newNote);
+
+                    // 5. Clear the input box for the next note
+                    noteInput.value = '';
+                }
+            }
+        });
+
+        // === SCRIPT 7: EXPERIENCE MODAL FUNCTIONALITY ===
+        const experienceCards = document.querySelectorAll('.experience-card');
+        const modalOverlay = document.getElementById('experience-modal');
+        const modalBody = document.getElementById('modal-body');
+        const modalCloseButton = document.querySelector('.modal-close-button');
+
+        // Function to open the modal
+        function openModal(card) {
+            // 1. Get the HTML of the entire visible preview (images, title, etc.)
+            const previewHTML = card.querySelector('.experience-preview').innerHTML;
+            // 2. Get the HTML of the hidden detailed text
+            const detailsHTML = card.querySelector('.experience-details').innerHTML;
+
+            // 3. Combine them and inject into the modal body
+            modalBody.innerHTML = previewHTML + detailsHTML;
+            modalOverlay.querySelector('.modal-content').scrollTop = 0;
+            
+            // Show the modal and prevent background scroll
+            modalOverlay.classList.add('active');
+            document.body.classList.add('modal-open');
+        }
+
+        // Function to close the modal (Upgraded to stop video)
+        function closeModal() {
+            // Find if there's a video playing inside the modal
+            const modalVideo = modalBody.querySelector('video');
+            if (modalVideo) {
+                // If a video exists, pause it and remove its source to stop it completely
+                modalVideo.pause();
+            }
+
+            // Hide the modal and allow the background to scroll again
+            modalOverlay.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        }
+
+        // Event Listeners
+        experienceCards.forEach(card => {
+            card.addEventListener('click', () => {
+                openModal(card);
+            });
+        });
+
+        modalCloseButton.addEventListener('click', closeModal);
+
+        // Close modal by clicking on the background overlay
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        // Close modal by pressing the Escape key
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+                e.preventDefault(); // <-- THE FIX: Stops the browser from also acting on the key press
+                closeModal();
+            }
+        });
+
+        // === SCRIPT 8 (FINAL UPGRADE): IMAGES-ONLY FULL GALLERY LIGHTBOX ===
+        const projectImages = document.querySelectorAll('.card-details .image-scroller img');
+
+        projectImages.forEach(clickedImage => {
+            clickedImage.addEventListener('click', (e) => {
+                // Stop the click from closing the parent card
+                e.stopPropagation();
+
+                const originalGallery = clickedImage.closest('.image-scroller');
+                if (!originalGallery) return;
+
+                // 1. Find ALL images within the original gallery
+                const originalImages = Array.from(originalGallery.querySelectorAll('img'));
+                // Find the index of the image we actually clicked on
+                const clickedImageIndex = originalImages.findIndex(img => img === clickedImage);
+
+                // 2. Clear the modal
+                modalBody.innerHTML = '';
+
+                // 3. Create a NEW, empty gallery container for the modal
+                const newGallery = document.createElement('div');
+                newGallery.className = 'image-scroller'; // Give it the right class for styling
+
+                // 4. Clone ONLY the images and add them to our new gallery
+                originalImages.forEach(img => {
+                    newGallery.appendChild(img.cloneNode(true));
+                });
+                
+                // 5. Add the new, images-only gallery to the modal
+                modalBody.appendChild(newGallery);
+                
+                // 6. Scroll to the correct image in the new gallery
+                const allClonedImages = newGallery.querySelectorAll('img');
+                if (allClonedImages[clickedImageIndex]) {
+                    allClonedImages[clickedImageIndex].scrollIntoView({
+                        behavior: 'instant',
+                        inline: 'center',
+                        block: 'nearest'
+                    });
+                }
+                
+                // 7. Activate the modal
+                modalOverlay.classList.add('active');
+                document.body.classList.add('modal-open');
+            });
+        });
+
+        // === SCRIPT 9: CLICKABLE VIDEO MODAL (Simplified) ===
+        document.querySelectorAll('.clickable-video').forEach(videoElement => {
+            videoElement.addEventListener('click', (e) => {
+                // Stop the click from bubbling up and closing the card
+                e.stopPropagation();
+
+                // 1. Pause the small video that was clicked
+                videoElement.pause();
+
+                // 2. Clear the modal of any previous content
+                modalBody.innerHTML = '';
+
+                // 3. Create a brand new video element for the modal
+                const modalVideo = document.createElement('video');
+                modalVideo.src = videoElement.src; // Use the same video source
+                modalVideo.controls = true; // Add full video controls (play, pause, volume, etc.)
+                modalVideo.autoplay = true; // Start playing automatically
+                modalVideo.muted = false;   // UNMUTE the video by default in the modal
+
+                // 4. Style the new video to fit the modal nicely
+                modalVideo.style.width = '100%';
+                modalVideo.style.maxHeight = '85vh';
+                modalVideo.style.borderRadius = '6px';
+                
+                // 5. Add the new video to the modal and show it
+                modalBody.appendChild(modalVideo);
+                modalOverlay.classList.add('active');
+                document.body.classList.add('modal-open');
+            });
+        });
+        
+    </script>
+            
+
+</body>
+</html>
